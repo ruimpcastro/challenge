@@ -1,5 +1,5 @@
-import { clearDestinations } from "./clearDestinations.js";
-import { debouncer } from "./debouncer.js";
+import { clearAutocomplete } from "./clearAutocomplete.js";
+import { debounce } from "./debounce.js";
 import { fetchDestinations } from "./fetchDestinations.js";
 
 export function searchInput(placeholder) {
@@ -22,12 +22,12 @@ export function searchInput(placeholder) {
 
   inputBox.addEventListener(
     "input",
-    debouncer(() => {
+    debounce(() => {
       search = inputBox.value;
       if (search) {
         fetchDestinations(inputBox, url, search, handleAssignDestination);
       } else {
-        clearDestinations();
+        clearAutocomplete();
       }
     })
   );

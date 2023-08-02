@@ -1,9 +1,9 @@
-export function debouncer(callback) {
+export function debounce(callback) {
   let timer;
   return () => {
     clearTimeout(timer);
     timer = setTimeout(() => {
       callback();
-    }, 500);
+    }, 200);
   };
 }
