@@ -1,4 +1,4 @@
-export function destinationsList(results, search, assignDestination) {
+export function autocomplete(results, search, assignDestination) {
   const searchContainer = document.getElementById("search-container");
   const unorderedList = document.createElement("ul");
   unorderedList.setAttribute("id", "results-list");

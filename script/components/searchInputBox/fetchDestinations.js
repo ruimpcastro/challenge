@@ -1,4 +1,4 @@
-import { destinationsList } from "./destinationsList.js";
+import { autocomplete } from "./autocomplete.js";
 
 export function fetchDestinations(
   element,
@@ -10,11 +10,9 @@ export function fetchDestinations(
     .then((response) => response.json())
     .then((data) => {
       if (data.length > 0) {
-        element.after(
-          destinationsList(...data, search, handleAssignDestination)
-        );
+        element.after(autocomplete(...data, search, handleAssignDestination));
       } else {
-        element.after(destinationsList(null, search, handleAssignDestination));
+        element.after(autocomplete(null, search, handleAssignDestination));
       }
     })
     .catch((error) => {
