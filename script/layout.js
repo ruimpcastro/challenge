@@ -1,4 +1,4 @@
-import { SearchInput } from "./components/searchInputBox/search_Input.js";
+import { SearchInput } from "./components/searchInputBox/SearchInput.js";
 import { datepicker } from "./components/datepicker/datepicker.js";
 
 const body = document.getElementsByTagName("body")[0];
