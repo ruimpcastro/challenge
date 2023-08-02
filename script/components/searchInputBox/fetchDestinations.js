@@ -1,6 +1,6 @@
-import { searchResults } from "./searchResults.js";
+import { destinationsList } from "./destinationsList.js";
 
-export function fetchDestination(
+export function fetchDestinations(
   element,
   url,
   search,
@@ -10,9 +10,11 @@ export function fetchDestination(
     .then((response) => response.json())
     .then((data) => {
       if (data.length > 0) {
-        element.after(searchResults(...data, search, handleAssignDestination));
+        element.after(
+          destinationsList(...data, search, handleAssignDestination)
+        );
       } else {
-        element.after(searchResults(null, search, handleAssignDestination));
+        element.after(destinationsList(null, search, handleAssignDestination));
       }
     })
     .catch((error) => {

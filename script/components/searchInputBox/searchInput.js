@@ -1,8 +1,8 @@
-import { clearSearch } from "./clearSearch.js";
+import { clearDestinations } from "./clearDestinations.js";
 import { debouncer } from "./debouncer.js";
-import { fetchDestination } from "./fetchDestination.js";
+import { fetchDestinations } from "./fetchDestinations.js";
 
-export function searchInputBox(placeholder) {
+export function searchInput(placeholder) {
   let search;
   const url =
     "https://api.cloud.tui.com/search-destination/v2/de/package/TUICOM/2/autosuggest/peakwork/";
@@ -25,9 +25,9 @@ export function searchInputBox(placeholder) {
     debouncer(() => {
       search = inputBox.value;
       if (search) {
-        fetchDestination(inputBox, url, search, handleAssignDestination);
+        fetchDestinations(inputBox, url, search, handleAssignDestination);
       } else {
-        clearSearch();
+        clearDestinations();
       }
     })
   );
