@@ -17,17 +17,17 @@ export function datepicker() {
   const datepicker = document.createElement("input");
   datepicker.setAttribute("type", "date");
   datepicker.setAttribute("id", "datepicker");
-  datepicker.setAttribute("value", new Date().toISOString().slice(0, 10));
-  datepicker.setAttribute("min", new Date().toISOString().slice(0, 10));
+  datepicker.setAttribute("value", TODAY.toISOString().slice(0, 10));
+  datepicker.setAttribute("min", TODAY.toISOString().slice(0, 10));
   datepicker.setAttribute("max", NEXT_YEAR);
 
   datepicker.addEventListener("change", () => {
     day = datepicker.valueAsDate.getDate();
     month = datepicker.valueAsDate.getMonth();
     year = datepicker.valueAsDate.getFullYear();
-    const date = new Date(year, month, day).toISOString().slice(0, 10);
 
-    showDate(date);
+    const newDate = new Date(year, month, day).toISOString().slice(0, 10);
+    showDate(newDate);
   });
 
   return datepicker;
