@@ -2,6 +2,12 @@ import { clearAutocomplete } from "./clearAutocomplete.js";
 import { debounce } from "./debounce.js";
 import { fetchDestinations } from "./fetchDestinations.js";
 
+/**
+ * Search input box component
+ * @returns {HTMLInputElement} inputBox
+ *
+ */
+
 export function SearchInput() {
   let search;
   const URL =

@@ -1,6 +1,16 @@
 import { showDate } from "../../events/dateEmitter.js";
 
+/**
+ * Datepicker component
+ * @returns {HTMLInputElement} datepicker
+ *
+ */
+
 export function datepicker() {
+  let day;
+  let month;
+  let year;
+
   const TODAY = new Date();
   const NEXT_YEAR = new Date(
     TODAY.getFullYear() + 1,
@@ -9,10 +19,6 @@ export function datepicker() {
   )
     .toISOString()
     .slice(0, 10);
-
-  let day;
-  let month;
-  let year;
 
   const datepicker = document.createElement("input");
   datepicker.setAttribute("type", "date");

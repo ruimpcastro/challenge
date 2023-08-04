@@ -2,24 +2,13 @@
 
 /**
  * @class EventEmitter
- * @description State management class that allows for event-driven programming.
+ * @description Class that allows event-driven programming.
  */
 
 export class EventEmitter {
   constructor() {
     this.events = {};
   }
-
-  /**
-   * @method on
-   * @description Adds a listener to the event queue for a given event.
-   * @param {string} event - The event name.
-   * @param {function} listener - The callback function.
-   * @returns {removeListener} A function that removes the listener from the event queue.
-   * @example
-   * emitter.on('event', () => console.log('Hello there!'));
-   * emitter.emit('event'); // 'Hello there!'
-   */
 
   removeListener(event, listener) {
     if (typeof this.events[event] === "object") {
@@ -29,6 +18,16 @@ export class EventEmitter {
       }
     }
   }
+
+  /**
+   * @method on
+   * @description Adds a listener to the event object for a given event.
+   * @param {string} event - The event name.
+   * @param {function} listener - The callback function.
+   * @example
+   * emitter.on('event', () => console.log('Hello there!'));
+   * emitter.emit('event'); // 'Hello there!'
+   */
 
   on(event, listener) {
     if (typeof this.events[event] !== "object") {

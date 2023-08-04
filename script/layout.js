@@ -1,6 +1,8 @@
 import { SearchInput } from "./components/searchInputBox/SearchInput.js";
 import { datepicker } from "./components/datepicker/datepicker.js";
 
+// Layout of the page.
+
 const body = document.getElementsByTagName("body")[0];
 
 const searchContainer = document.createElement("div");

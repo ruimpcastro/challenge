@@ -2,7 +2,7 @@ import { EventEmitter } from "../EventEmitter.js";
 
 const dateEmitter = new EventEmitter();
 
-dateEmitter.on("date", (date) => {
+dateEmitter.on("selected-date", (date) => {
   const outputExists = document.getElementById("date-output");
   if (outputExists) {
     outputExists.remove();
@@ -16,6 +16,11 @@ dateEmitter.on("date", (date) => {
   return output;
 });
 
+/**
+ * @method showDate
+ * @description Emits an event and calls the listener.
+ */
+
 export const showDate = (date) => {
-  dateEmitter.emit("date", date);
+  dateEmitter.emit("selected-date", date);
 };
