@@ -15,6 +15,7 @@ export function SearchInput() {
 
   const inputBox = document.createElement("input");
   inputBox.setAttribute("type", "search");
+  inputBox.setAttribute("required", true);
   inputBox.classList.add("search-input");
   inputBox.setAttribute("placeholder", "Choose a destination");
 
@@ -37,6 +38,15 @@ export function SearchInput() {
       }
     })
   );
+
+  inputBox.addEventListener("focusout", () => {
+    if (inputBox.value === "") {
+      const warning = document.createElement("span");
+      warning.classList.add("warning");
+      warning.textContent = "Please choose a destination";
+      inputBox.parentNode.appendChild(warning);
+    }
+  });
 
   return inputBox;
 }
