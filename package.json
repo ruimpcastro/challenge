@@ -4,13 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "http-server --cors"
+    "start": "http-server --cors",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
-    "http-server": "^14.1.1"
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "@testing-library/jest-dom": "^5.17.0",
+    "babel-jest": "^29.6.2",
+    "http-server": "^14.1.1",
+    "jest": "^29.6.2"
+  },
+  "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.22.9",
+    "jest-environment-jsdom": "^29.6.2"
   }
 }

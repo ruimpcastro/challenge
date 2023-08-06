@@ -8,7 +8,7 @@ import { fetchDestinations } from "./fetchDestinations.js";
  *
  */
 
-export function SearchInput() {
+export function searchInput() {
   let search;
   const URL =
     "https://api.cloud.tui.com/search-destination/v2/de/package/TUICOM/2/autosuggest/peakwork/";
@@ -39,12 +39,25 @@ export function SearchInput() {
     })
   );
 
-  inputBox.addEventListener("focusout", () => {
-    if (inputBox.value === "") {
+  inputBox.addEventListener("change", () => {
+    let showWarning = false;
+
+    if (!search) {
+      showWarning = true;
+    }
+
+    if (showWarning === true) {
       const warning = document.createElement("span");
-      warning.classList.add("warning");
+      warning.setAttribute("id", "warning");
       warning.textContent = "Please choose a destination";
-      inputBox.parentNode.appendChild(warning);
+      inputBox.after(warning);
+    }
+
+    if (showWarning === false) {
+      const warning = document.getElementById("warning");
+      if (warning) {
+        warning.remove();
+      }
     }
   });
 
