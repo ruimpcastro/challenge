@@ -8,7 +8,7 @@ import { fetchDestinations } from "./fetchDestinations.js";
  *
  */
 
-export function SearchInput() {
+export function searchInput() {
   let search;
   const URL =
     "https://api.cloud.tui.com/search-destination/v2/de/package/TUICOM/2/autosuggest/peakwork/";

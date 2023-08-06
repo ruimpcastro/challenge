@@ -1,4 +1,4 @@
-import { SearchInput } from "../script/components/searchInputBox/SearchInput";
+import { searchInput } from "../script/components/searchInputBox/searchInput";
 import { fetchDestinations } from "../script/components/searchInputBox/fetchDestinations";
 import { clearAutocomplete } from "../script/components/searchInputBox/clearAutocomplete";
 import { debounce } from "../script/components/searchInputBox/debounce";
@@ -16,7 +16,7 @@ describe("SearchInput Component", () => {
   });
 
   it("should render a search input box", () => {
-    const inputBox = SearchInput();
+    const inputBox = searchInput();
     expect(inputBox).toBeTruthy();
     expect(inputBox).toBeInstanceOf(HTMLInputElement);
     expect(inputBox.getAttribute("type")).toBe("search");
@@ -25,13 +25,13 @@ describe("SearchInput Component", () => {
   });
 
   it("should call debounce on input", () => {
-    const inputBox = SearchInput();
+    const inputBox = searchInput();
     inputBox.dispatchEvent(new Event("change"));
     expect(debounce).toHaveBeenCalledTimes(1);
   });
 
   it("should call fetchDestinations on input", () => {
-    const inputBox = SearchInput();
+    const inputBox = searchInput();
     inputBox.dispatchEvent(new Event("change"));
     if (inputBox.value) {
       expect(fetchDestinations).toHaveBeenCalled();
@@ -39,14 +39,14 @@ describe("SearchInput Component", () => {
   });
 
   it("should not call fetchDestinations when input is empty", () => {
-    const inputBox = SearchInput();
+    const inputBox = searchInput();
     inputBox.value = "";
     inputBox.dispatchEvent(new Event("change"));
     expect(fetchDestinations).toHaveBeenCalledTimes(0);
   });
 
   it("should call clearAutocomplete on input", () => {
-    const inputBox = SearchInput();
+    const inputBox = searchInput();
     inputBox.dispatchEvent(new Event("change"));
     if (inputBox.value) {
       expect(clearAutocomplete).toHaveBeenCalled();
@@ -54,14 +54,14 @@ describe("SearchInput Component", () => {
   });
 
   it("should not call clearAutocomplete when input is empty", () => {
-    const inputBox = SearchInput();
+    const inputBox = searchInput();
     inputBox.value = "";
     inputBox.dispatchEvent(new Event("change"));
     expect(clearAutocomplete).not.toHaveBeenCalled();
   });
 
   it("should not show a warning message when inputBox has a value", () => {
-    const inputBox = SearchInput();
+    const inputBox = searchInput();
 
     inputBox.value = "Some Destination";
     inputBox.dispatchEvent(new Event("change"));
