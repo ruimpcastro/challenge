@@ -8,7 +8,7 @@ import { fetchDestinations } from "./fetchDestinations.js";
  *
  */
 
-export function searchInput() {
+export function searchInput(onAssignDestination) {
   let search;
   const URL =
     "https://api.cloud.tui.com/search-destination/v2/de/package/TUICOM/2/autosuggest/peakwork/";
@@ -17,6 +17,7 @@ export function searchInput() {
   inputBox.setAttribute("type", "search");
   inputBox.setAttribute("required", true);
   inputBox.classList.add("search-input");
+  inputBox.setAttribute("id", "search-destination");
   inputBox.setAttribute("placeholder", "Choose a destination");
 
   // Add search icon
@@ -25,6 +26,7 @@ export function searchInput() {
   const handleAssignDestination = (newDestination) => {
     inputBox.value = newDestination;
     search = inputBox.value;
+    onAssignDestination(newDestination);
   };
 
   inputBox.addEventListener(

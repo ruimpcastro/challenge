@@ -1,4 +1,4 @@
-import { showDate } from "../../events/dateEmitter.js";
+import { renderDate } from "../../events/dateEmitter.js";
 
 /**
  * Datepicker component
@@ -6,7 +6,7 @@ import { showDate } from "../../events/dateEmitter.js";
  *
  */
 
-export function datepicker() {
+export function datepicker(onAssignDate) {
   let day;
   let month;
   let year;
@@ -40,7 +40,9 @@ export function datepicker() {
       year = datepicker.valueAsDate.getFullYear();
 
       const newDate = new Date(year, month, day).toISOString().slice(0, 10);
-      showDate(newDate);
+      const convertedDate = new Date(newDate).toLocaleDateString("de-DE");
+
+      onAssignDate(convertedDate);
     }
   });
 

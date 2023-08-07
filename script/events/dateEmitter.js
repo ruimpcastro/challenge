@@ -7,10 +7,10 @@ dateEmitter.on("selected-date", (date) => {
   if (outputExists) {
     outputExists.remove();
   }
-  const dateContainer = document.getElementById("datepicker-container");
+  const dateContainer = document.getElementById("date-output-container");
   const output = document.createElement("span");
   output.setAttribute("id", "date-output");
-  output.textContent = date;
+  output.textContent = ` on the following date: ${date}`;
   dateContainer.appendChild(output);
 
   return output;
@@ -21,6 +21,6 @@ dateEmitter.on("selected-date", (date) => {
  * @description Emits an event and calls the listener.
  */
 
-export const showDate = (date) => {
+export const renderDate = (date) => {
   dateEmitter.emit("selected-date", date);
 };
