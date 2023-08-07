@@ -3,7 +3,7 @@ import { renderDate } from "../../events/dateEmitter.js";
 /**
  * Datepicker component
  * @returns {HTMLInputElement} datepicker
- *
+ * @param {function} onAssignDate
  */
 
 export function datepicker(onAssignDate) {

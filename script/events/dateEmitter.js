@@ -10,7 +10,7 @@ dateEmitter.on("selected-date", (date) => {
   const dateContainer = document.getElementById("date-output-container");
   const output = document.createElement("span");
   output.setAttribute("id", "date-output");
-  output.textContent = ` on the following date: ${date}`;
+  output.textContent = ` is booked on ${date}. `;
   dateContainer.appendChild(output);
 
   return output;
