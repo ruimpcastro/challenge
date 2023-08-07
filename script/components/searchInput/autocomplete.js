@@ -1,10 +1,10 @@
-export function autocomplete(results, search, assignDestination) {
+export function autocomplete(results, search, onAssignDestination) {
   const searchContainer = document.getElementById("search-container");
   const unorderedList = document.createElement("ul");
   unorderedList.setAttribute("id", "results-list");
 
   const handleAssignDestination = (newDestination, element) => {
-    assignDestination(newDestination);
+    onAssignDestination(newDestination);
     element.remove();
   };
 
