@@ -22,11 +22,14 @@ export function datepicker(onAssignDate) {
   datepicker.setAttribute("min", TODAY.toISOString().slice(0, 10));
   datepicker.setAttribute("max", NEXT_YEAR.toISOString().slice(0, 10));
 
+  // Assigns the date when the datepicker loses focus or the enter key is pressed
   datepicker.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       assignDate(datepicker, TODAY, NEXT_YEAR, onAssignDate);
     }
   });
+
+  // Assigns the date when the datepicker loses focus or the enter key is pressed
   datepicker.addEventListener("blur", () => {
     assignDate(datepicker, TODAY, NEXT_YEAR, onAssignDate);
   });
