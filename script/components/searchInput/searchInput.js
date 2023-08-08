@@ -36,6 +36,10 @@ export function searchInput(onAssignDestination) {
   inputBox.setAttribute("placeholder", "Choose a destination...");
   inputWrapper.appendChild(inputBox);
 
+  const destinationLabel = document.createElement("label");
+  destinationLabel.setAttribute("for", "search-destination");
+  destinationLabel.textContent = "Where do you want to go?";
+
   // Adds an icon to clear the input
   const clearIcon = document.createElement("i");
   clearIcon.classList.add("fa-solid", "fa-xmark");

@@ -9,6 +9,7 @@ let isDate = false;
 
 const updateParagraphVisibility = () => {
   const paragraph = document.getElementById("booked-trip");
+  // If both destination and date are selected, show the paragraph
   if (isDate && isDestination) {
     paragraph.style.display = "flex";
   } else {
@@ -16,6 +17,7 @@ const updateParagraphVisibility = () => {
   }
 };
 
+// Creates the span element for the destination
 const handleAssignDestination = (destination) => {
   const destinationOutput = document.getElementById(
     "destination-output-container"
@@ -34,6 +36,7 @@ const handleAssignDestination = (destination) => {
   updateParagraphVisibility();
 };
 
+// Creates the span element for the date with an event listener
 const handleAssignDate = (date) => {
   isDate = false;
   if (date) {
@@ -48,15 +51,32 @@ const handleAssignDate = (date) => {
 
 const body = document.querySelector("body");
 
+const h1Title = document.createElement("h1");
+h1Title.setAttribute("id", "title");
+h1Title.textContent = "Plan your next trip 🛫";
+
+body.appendChild(h1Title);
+
 const searchContainer = document.createElement("div");
 searchContainer.setAttribute("id", "search-container");
 body.appendChild(searchContainer);
+
+const destinationLabel = document.createElement("label");
+destinationLabel.setAttribute("for", "search-destination");
+destinationLabel.setAttribute("id", "destination-label");
+destinationLabel.textContent = "Where do you want to go?";
+searchContainer.appendChild(destinationLabel);
 
 searchContainer.appendChild(searchInput(handleAssignDestination));
 
 const datepickerContainer = document.createElement("div");
 datepickerContainer.setAttribute("id", "datepicker-container");
 body.appendChild(datepickerContainer);
+
+const dateLabel = document.createElement("label");
+dateLabel.textContent = "Choose a date";
+dateLabel.setAttribute("for", "datepicker");
+datepickerContainer.appendChild(dateLabel);
 
 datepickerContainer.appendChild(datepicker(handleAssignDate));
 

@@ -12,6 +12,7 @@
   --input-max-width: 100%;
   --search-height: 1.5rem;
   --warning-gap: 0.5rem;
+  --label-height: 1.25rem;
 }
 
 * {
@@ -27,6 +28,13 @@ body {
   gap: 1rem;
   background-color: #fffff5;
   height: 100vh;
+  align-items: center;
+}
+
+#title {
+  text-align: center;
+  margin: 0;
+  margin-bottom: 2rem;
 }
 
 ::-webkit-search-cancel-button {
@@ -36,23 +44,27 @@ body {
 #search-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
   gap: var(--warning-gap);
+  max-width: var(--input-max-width);
+  width: var(--input-width);
+}
+
+#destination-label {
+  height: var(--label-height);
 }
 
 #input-wrapper {
   border-bottom: 1px solid var(--border-color);
   display: flex;
-  max-width: var(--input-max-width);
-  width: var(--input-width);
+  width: 100%;
   padding-bottom: 0.25rem;
   gap: 0.5rem;
   height: var(--search-height);
 }
 
 #input-wrapper:focus-within {
-  margin-bottom: -0.5px;
   border-bottom-width: 2px;
 }
 
@@ -80,7 +92,9 @@ body {
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   position: absolute;
-  top: var(--search-height);
+  top: calc(
+    var(--search-height) + var(--warning-gap) + var(--label-height) - 1px
+  );
 }
 
 .item {
@@ -90,19 +104,24 @@ body {
 
 #datepicker-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   gap: var(--warning-gap);
+  max-width: var(--input-max-width);
+  width: var(--input-width);
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 #datepicker {
-  padding: 0.5rem;
+  padding: 0.5rem 0 0.5rem 0.25rem;
   border-radius: 0.5rem;
   border: 1px solid var(--border-color);
   display: flex;
   flex-direction: row-reverse;
   box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);
   min-width: fit-content;
+  gap: 0.25rem;
 }
 
 #datepicker:focus-visible {
@@ -114,6 +133,9 @@ body {
 
 ::-webkit-calendar-picker-indicator {
   cursor: pointer;
+  padding: 0.25rem;
+  background-color: var(--border-color);
+  border-radius: 1rem;
 }
 
 ::-webkit-datetime-edit {
@@ -127,4 +149,5 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  padding-top: 2rem;
 }

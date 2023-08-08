@@ -1,6 +1,5 @@
 /**
  * @param {string} id - The id of the warning
- *
  * @description Removes a warning from the DOM.
  *
  */
