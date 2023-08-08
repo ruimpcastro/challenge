@@ -25,7 +25,16 @@ export function datepicker(onAssignDate) {
   datepicker.setAttribute("min", TODAY.toISOString().slice(0, 10));
   datepicker.setAttribute("max", NEXT_YEAR.toISOString().slice(0, 10));
 
-  datepicker.addEventListener("change", () => {
+  datepicker.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      assignDate();
+    }
+  });
+  datepicker.addEventListener("blur", () => {
+    assignDate();
+  });
+
+  function assignDate() {
     const selectedDate = datepicker.valueAsDate;
 
     if (selectedDate < TODAY) {
@@ -35,16 +44,14 @@ export function datepicker(onAssignDate) {
       datepicker.preventDefault;
       alert("Please select a date within the next year.");
     } else {
-      day = datepicker.valueAsDate.getDate();
-      month = datepicker.valueAsDate.getMonth();
-      year = datepicker.valueAsDate.getFullYear();
-
-      const newDate = new Date(year, month, day).toISOString().slice(0, 10);
+      day = datepicker.valueAsDate.getUTCDate();
+      month = datepicker.valueAsDate.getUTCMonth();
+      year = datepicker.valueAsDate.getUTCFullYear();
+      const newDate = new Date(year, month, day).toISOString();
       const convertedDate = new Date(newDate).toLocaleDateString("de-DE");
-
       onAssignDate(convertedDate);
     }
-  });
+  }
 
   return datepicker;
 }
