@@ -1,4 +1,4 @@
-import { renderDate } from "../../events/dateEmitter.js";
+import { assignDate } from "./assignDate.js";
 
 /**
  * Datepicker component
@@ -7,10 +7,6 @@ import { renderDate } from "../../events/dateEmitter.js";
  */
 
 export function datepicker(onAssignDate) {
-  let day;
-  let month;
-  let year;
-
   const TODAY = new Date();
   const NEXT_YEAR = new Date(
     TODAY.getFullYear() + 1,
@@ -27,31 +23,12 @@ export function datepicker(onAssignDate) {
 
   datepicker.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
-      assignDate();
+      assignDate(datepicker, TODAY, NEXT_YEAR, onAssignDate);
     }
   });
   datepicker.addEventListener("blur", () => {
-    assignDate();
+    assignDate(datepicker, TODAY, NEXT_YEAR, onAssignDate);
   });
-
-  function assignDate() {
-    const selectedDate = datepicker.valueAsDate;
-
-    if (selectedDate < TODAY) {
-      datepicker.preventDefault;
-      alert("Please select a date that is today or later.");
-    } else if (selectedDate > NEXT_YEAR) {
-      datepicker.preventDefault;
-      alert("Please select a date within the next year.");
-    } else {
-      day = datepicker.valueAsDate.getUTCDate();
-      month = datepicker.valueAsDate.getUTCMonth();
-      year = datepicker.valueAsDate.getUTCFullYear();
-      const newDate = new Date(year, month, day).toISOString();
-      const convertedDate = new Date(newDate).toLocaleDateString("de-DE");
-      onAssignDate(convertedDate);
-    }
-  }
 
   return datepicker;
 }
