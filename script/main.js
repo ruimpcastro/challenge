@@ -7,7 +7,7 @@ let isDate = false;
 
 const updateParagraphVisibility = () => {
   if (isDate && isDestination) {
-    paragraph.style.display = "block";
+    paragraph.style.display = "flex";
   } else {
     paragraph.style.display = "none";
   }
@@ -25,7 +25,7 @@ const handleAssignDestination = (destination) => {
   }
   const span = document.createElement("span");
   span.setAttribute("id", "destination-output");
-  span.textContent = `We're booking your trip to ${destination}`;
+  span.textContent = `Your trip to ${destination}`;
   destinationOutput.appendChild(span);
   updateParagraphVisibility();
 };
@@ -62,15 +62,25 @@ outputContainer.setAttribute("id", "output-container");
 body.appendChild(outputContainer);
 
 const paragraph = document.createElement("p");
+paragraph.style.display = "none";
 paragraph.setAttribute("id", "booked-trip");
 outputContainer.appendChild(paragraph);
+
+const selectedContainer = document.createElement("span");
+selectedContainer.setAttribute("id", "selected-container");
+paragraph.appendChild(selectedContainer);
 
 const destinationOutput = document.createElement("span");
 destinationOutput.setAttribute("id", "destination-output-container");
 
-paragraph.appendChild(destinationOutput);
+selectedContainer.appendChild(destinationOutput);
 
 const dateOutput = document.createElement("span");
 dateOutput.setAttribute("id", "date-output-container");
 
-paragraph.appendChild(dateOutput);
+selectedContainer.appendChild(dateOutput);
+
+const enjoy = document.createElement("span");
+enjoy.setAttribute("id", "enjoy");
+enjoy.textContent = "Enjoy your trip! 🏖";
+paragraph.appendChild(enjoy);

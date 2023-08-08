@@ -5,6 +5,7 @@ import { fetchDestinations } from "./fetchDestinations.js";
 /**
  * Search input box component
  * @returns {HTMLInputElement} inputBox
+ * @param {function} onAssignDestination
  *
  */
 
@@ -13,19 +14,39 @@ export function searchInput(onAssignDestination) {
   const URL =
     "https://api.cloud.tui.com/search-destination/v2/de/package/TUICOM/2/autosuggest/peakwork/";
 
-  const inputBox = document.createElement("input");
-  inputBox.setAttribute("type", "search");
-  inputBox.setAttribute("required", true);
-  inputBox.classList.add("search-input");
-  inputBox.setAttribute("id", "search-destination");
-  inputBox.setAttribute("placeholder", "Choose a destination");
+  const inputWrapper = document.createElement("div");
+  inputWrapper.setAttribute("id", "input-wrapper");
+  const umberellaIcon = document.createElement("i");
+  umberellaIcon.classList.add("fa-solid", "fa-umbrella-beach");
 
-  // Add search icon
-  // <i class="fa-sharp fa-regular fa-magnifying-glass"></i>
+  inputWrapper.appendChild(umberellaIcon);
+
+  const inputBox = document.createElement("input");
+  inputBox.setAttribute("type", "text");
+  inputBox.setAttribute("required", true);
+  inputBox.setAttribute("id", "search-destination");
+  inputBox.setAttribute("placeholder", "Choose a destination...");
+  inputWrapper.appendChild(inputBox);
+
+  const clearIcon = document.createElement("i");
+  clearIcon.classList.add("fa-solid", "fa-xmark");
+  clearIcon.style.cursor = "pointer";
+  inputWrapper.appendChild(clearIcon);
+
+  const searchIcon = document.createElement("i");
+  searchIcon.classList.add("fa-solid", "fa-magnifying-glass");
+  inputWrapper.appendChild(searchIcon);
+
+  clearIcon.addEventListener("click", () => {
+    onAssignDestination("");
+    inputBox.value = "";
+    search = "";
+    clearAutocomplete();
+  });
 
   const handleAssignDestination = (newDestination) => {
     inputBox.value = newDestination;
-    search = inputBox.value;
+    search = newDestination;
     onAssignDestination(newDestination);
   };
 
@@ -34,7 +55,7 @@ export function searchInput(onAssignDestination) {
     debounce(() => {
       search = inputBox.value;
       if (search) {
-        fetchDestinations(inputBox, URL, search, handleAssignDestination);
+        fetchDestinations(inputWrapper, URL, search, handleAssignDestination);
       } else {
         clearAutocomplete();
       }
@@ -44,7 +65,7 @@ export function searchInput(onAssignDestination) {
   inputBox.addEventListener("change", () => {
     let showWarning = false;
 
-    if (!search) {
+    if (inputBox.value === "") {
       showWarning = true;
     }
 
@@ -52,7 +73,7 @@ export function searchInput(onAssignDestination) {
       const warning = document.createElement("span");
       warning.setAttribute("id", "warning");
       warning.textContent = "Please choose a destination";
-      inputBox.after(warning);
+      inputWrapper.after(warning);
     }
 
     if (showWarning === false) {
@@ -63,5 +84,5 @@ export function searchInput(onAssignDestination) {
     }
   });
 
-  return inputBox;
+  return inputWrapper;
 }

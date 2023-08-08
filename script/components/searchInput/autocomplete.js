@@ -23,6 +23,7 @@ export function autocomplete(results, search, onAssignDestination) {
     const listItem = document.createElement("li");
     listItem.classList.add("item");
     listItem.textContent = "No results found";
+    listItem.style.cursor = "default";
 
     unorderedList.appendChild(listItem);
   } else {
@@ -34,7 +35,8 @@ export function autocomplete(results, search, onAssignDestination) {
     results.items.forEach((result) => {
       const listItem = document.createElement("li");
       listItem.classList.add("item");
-      listItem.textContent = result.name;
+      const boldedResult = result.name.replace(search, `<b>${search}</b>`);
+      listItem.innerHTML = boldedResult;
 
       unorderedList.appendChild(listItem);
 
