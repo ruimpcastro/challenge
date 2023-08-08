@@ -11,6 +11,7 @@
   --input-width: 32rem;
   --input-max-width: 100%;
   --search-height: 1.5rem;
+  --warning-gap: 0.5rem;
 }
 
 * {
@@ -37,6 +38,7 @@ body {
   flex-direction: column;
   align-items: center;
   position: relative;
+  gap: var(--warning-gap);
 }
 
 #input-wrapper {
@@ -88,7 +90,9 @@ body {
 
 #datepicker-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--warning-gap);
 }
 
 #datepicker {

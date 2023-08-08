@@ -1,3 +1,5 @@
+import { clearWarning } from "../warning/clearWarning.js";
+import { renderWarning } from "../warning/renderWarning.js";
 import { clearAutocomplete } from "./clearAutocomplete.js";
 import { debounce } from "./debounce.js";
 import { fetchDestinations } from "./fetchDestinations.js";
@@ -11,8 +13,11 @@ import { fetchDestinations } from "./fetchDestinations.js";
 
 export function searchInput(onAssignDestination) {
   let search;
+
   const URL =
     "https://api.cloud.tui.com/search-destination/v2/de/package/TUICOM/2/autosuggest/peakwork/";
+  const WARNING_ID = "search-warning";
+  const WARNING_MESSAGE = "Please select a destination from the list";
 
   const inputWrapper = document.createElement("div");
   inputWrapper.setAttribute("id", "input-wrapper");
@@ -38,9 +43,11 @@ export function searchInput(onAssignDestination) {
   inputWrapper.appendChild(searchIcon);
 
   clearIcon.addEventListener("click", () => {
+    clearWarning(WARNING_ID);
     onAssignDestination("");
     inputBox.value = "";
     search = "";
+    renderWarning(WARNING_ID, WARNING_MESSAGE, inputWrapper);
     clearAutocomplete();
   });
 
@@ -55,34 +62,16 @@ export function searchInput(onAssignDestination) {
     debounce(() => {
       search = inputBox.value;
       if (search) {
+        clearWarning(WARNING_ID);
         fetchDestinations(inputWrapper, URL, search, handleAssignDestination);
       } else {
+        clearWarning(WARNING_ID);
+        onAssignDestination("");
+        renderWarning(WARNING_ID, WARNING_MESSAGE, inputWrapper);
         clearAutocomplete();
       }
     })
   );
-
-  inputBox.addEventListener("change", () => {
-    let showWarning = false;
-
-    if (inputBox.value === "") {
-      showWarning = true;
-    }
-
-    if (showWarning === true) {
-      const warning = document.createElement("span");
-      warning.setAttribute("id", "warning");
-      warning.textContent = "Please choose a destination";
-      inputWrapper.after(warning);
-    }
-
-    if (showWarning === false) {
-      const warning = document.getElementById("warning");
-      if (warning) {
-        warning.remove();
-      }
-    }
-  });
 
   return inputWrapper;
 }

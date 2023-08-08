@@ -15,10 +15,6 @@ export function autocomplete(results, search, onAssignDestination) {
     existingResults.remove();
   }
 
-  if (search === null) {
-    existingResults.remove();
-  }
-
   if (results === null) {
     const listItem = document.createElement("li");
     listItem.classList.add("item");
