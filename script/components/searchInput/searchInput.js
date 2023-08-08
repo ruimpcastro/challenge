@@ -73,6 +73,7 @@ export function searchInput(onAssignDestination) {
     "input",
     debounce(() => {
       search = inputBox.value;
+      console.log(search);
       if (search) {
         removeElement(WARNING_ID);
         fetchDestinations(inputWrapper, URL, search, handleAssignDestination);

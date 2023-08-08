@@ -1,4 +1,5 @@
 import { removeElement } from "../removeElement.js";
+import { warning } from "../warning/warning.js";
 
 /**
  * @param {Object} results - The results of the search
@@ -15,6 +16,7 @@ export function autocomplete(results, search, onAssignDestination) {
 
   // Assigns a destination to the search input and removes the old unordered list element
   const handleAssignDestination = (newDestination) => {
+    removeElement("warning");
     onAssignDestination(newDestination);
     removeElement("results-list");
   };
@@ -33,6 +35,9 @@ export function autocomplete(results, search, onAssignDestination) {
 
     unorderedList.appendChild(listItem);
   } else {
+    // Sorts the results alphabetically
+    results.items.sort((a, b) => a.name.localeCompare(b.name));
+
     // Creates the first element from the unordered list which is the category
     const categoryItem = document.createElement("li");
     categoryItem.classList.add("item--category");
@@ -48,12 +53,20 @@ export function autocomplete(results, search, onAssignDestination) {
 
       unorderedList.appendChild(listItem);
 
-      // Assigns a destination to the search input when the user clicks on a result
+      // Assigns a destination to the search input when the user clicks on a result if not clicked on any listItem give a warning sign
       listItem.addEventListener("click", () => {
         handleAssignDestination(result.name);
       });
     });
   }
+
+  // Removes the unordered list element when the user clicks outside of it
+  document.addEventListener("click", (event) => {
+    if (event.target.closest("#search-container")) {
+      return;
+    }
+    removeElement("results-list");
+  });
 
   return unorderedList;
 }

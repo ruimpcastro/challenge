@@ -4,8 +4,8 @@ import { tripDetails } from "./components/tripDetails/tripDetails.js";
 import { removeElement } from "./components/removeElement.js";
 import { renderDate } from "./events/dateEmitter.js";
 
-let isDestination = false;
-let isDate = false;
+let isDestination;
+let isDate;
 
 const updateParagraphVisibility = () => {
   const paragraph = document.getElementById("booked-trip");
@@ -22,10 +22,7 @@ const handleAssignDestination = (destination) => {
   const destinationOutput = document.getElementById(
     "destination-output-container"
   );
-  isDestination = false;
-  if (destination) {
-    isDestination = true;
-  }
+  isDestination = destination;
 
   removeElement("destination-output");
 
@@ -38,10 +35,7 @@ const handleAssignDestination = (destination) => {
 
 // Creates the span element for the date with an event listener
 const handleAssignDate = (date) => {
-  isDate = false;
-  if (date) {
-    isDate = true;
-  }
+  isDate = date;
 
   renderDate(date);
   updateParagraphVisibility();

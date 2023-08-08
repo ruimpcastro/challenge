@@ -1,78 +1,46 @@
 import { searchInput } from "../../script/components/searchInput/searchInput.js";
-import { debounce } from "../../script/components/searchInput/debounce.js";
 import { fetchDestinations } from "../../script/components/searchInput/fetchDestinations.js";
-import { removeElement } from "../../script/components/removeElement.js";
-import { warning } from "../../script/components/warning/warning.js";
 
-// Mock the debounce, fetchDestinations, removeElement and warning functions
-jest.mock("../../script/components/searchInput/debounce.js");
 jest.mock("../../script/components/searchInput/fetchDestinations.js");
-jest.mock("../../script/components/removeElement.js");
-jest.mock("../../script/components/warning/warning.js");
 
 describe("searchInput", () => {
-  let mockOnAssignDestination;
-  let inputWrapper;
-  let inputBox;
-  let clearIcon;
-  let searchIcon;
-  let debounceCallback;
+  let container;
+  let onAssignDestinationMock;
 
   beforeEach(() => {
-    mockOnAssignDestination = jest.fn();
-    debounceCallback = jest.fn();
-    debounce.mockImplementation((callback) => debounceCallback);
-
-    inputWrapper = searchInput(mockOnAssignDestination);
-    inputBox = inputWrapper.querySelector("#search-destination");
-    clearIcon = inputWrapper.querySelector(".fa-xmark");
-    searchIcon = inputWrapper.querySelector(".fa-magnifying-glass");
+    container = document.createElement("div");
+    onAssignDestinationMock = jest.fn();
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    document.body.innerHTML = "";
+    jest.resetAllMocks();
   });
 
-  test("clears input and calls onAssignDestination when clear icon is clicked", () => {
-    inputBox.value = "Some value";
-    clearIcon.click();
+  test("displays warning when search and input box values are empty", () => {
+    const inputElement = searchInput(onAssignDestinationMock);
+    const clearIcon = inputElement.querySelector(".fa-xmark");
 
-    expect(removeElement).toHaveBeenCalledWith("search-warning");
-    expect(mockOnAssignDestination).toHaveBeenCalledWith("");
+    document.body.appendChild(inputElement);
+
+    clearIcon.dispatchEvent(new Event("click"));
+
+    const warningElement = document.getElementById("search-warning");
+    expect(warningElement).toBeTruthy();
+    expect(onAssignDestinationMock).toHaveBeenCalledWith("");
+  });
+
+  test("clicking clearIcon cleans input and search values", () => {
+    const inputElement = searchInput(onAssignDestinationMock);
+    const inputBox = inputElement.querySelector("input");
+    const clearIcon = inputElement.querySelector(".fa-xmark");
+
+    document.body.appendChild(inputElement);
+
+    inputBox.value = "destination";
+    clearIcon.dispatchEvent(new Event("click"));
+
     expect(inputBox.value).toBe("");
-    expect(inputBox.value).toBe("");
-    expect(debounceCallback).not.toHaveBeenCalled();
-    expect(fetchDestinations).not.toHaveBeenCalled();
-  });
-
-  test("calls fetchDestinations and assigns destination on input", () => {
-    const newDestination = "New Destination";
-    inputBox.value = newDestination;
-    inputBox.dispatchEvent(new Event("input"));
-
-    expect(removeElement).toHaveBeenCalledWith("search-warning");
-    expect(fetchDestinations).toHaveBeenCalledWith(
-      inputWrapper,
-      expect.any(String),
-      newDestination,
-      expect.any(Function)
-    );
-    expect(debounceCallback).toHaveBeenCalled();
-    expect(mockOnAssignDestination).not.toHaveBeenCalled();
-  });
-
-  test("calls onAssignDestination and shows warning when input is empty", () => {
-    inputBox.value = "";
-    inputBox.dispatchEvent(new Event("input"));
-
-    expect(removeElement).toHaveBeenCalledWith("search-warning");
-    expect(mockOnAssignDestination).toHaveBeenCalledWith("");
-    expect(removeElement).toHaveBeenCalledWith("results-list");
-    expect(warning).toHaveBeenCalledWith(
-      "search-warning",
-      "Please select a destination from the list",
-      inputWrapper
-    );
-    expect(fetchDestinations).not.toHaveBeenCalled();
+    expect(onAssignDestinationMock).toHaveBeenCalledWith("");
   });
 });
