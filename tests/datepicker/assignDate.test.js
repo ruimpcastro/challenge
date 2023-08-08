@@ -2,7 +2,10 @@ import { assignDate } from "../../script/components/datepicker/assignDate";
 import { removeElement } from "../../script/components/removeElement";
 import { warning } from "../../script/components/warning/warning";
 
+// Mock removeElement and warning functions
 jest.mock("../../script/components/removeElement");
+
+// Mock removeElement and warning functions
 jest.mock("../../script/components/warning/warning");
 
 describe("assignDate function", () => {
