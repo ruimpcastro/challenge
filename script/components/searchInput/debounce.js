@@ -1,5 +1,4 @@
 /**
- * @method debounce
  * @description Delays the execution of a function.
  * @param {function} callback - The callback function that will be delayed.
  *

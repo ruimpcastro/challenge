@@ -1,12 +1,13 @@
 import { EventEmitter } from "../EventEmitter.js";
+import { removeElement } from "../components/removeElement.js";
 
 const dateEmitter = new EventEmitter();
 
 dateEmitter.on("selected-date", (date) => {
-  const outputExists = document.getElementById("date-output");
-  if (outputExists) {
-    outputExists.remove();
-  }
+  // Checks if the date is already displayed
+  removeElement("date-output");
+
+  // Creates the span element for the date
   const dateContainer = document.getElementById("date-output-container");
   const output = document.createElement("span");
   output.setAttribute("id", "date-output");

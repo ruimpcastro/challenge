@@ -1,20 +1,30 @@
+import { removeElement } from "../removeElement.js";
+
+/**
+ * @param {Object} results - The results of the search
+ * @param {string} search - The search term
+ * @param {function} onAssignDestination - The function to assign the destination
+ * @returns {HTMLUListElement} HTMLUListElement
+ *
+ */
+
 export function autocomplete(results, search, onAssignDestination) {
   const searchContainer = document.getElementById("search-container");
   const unorderedList = document.createElement("ul");
   unorderedList.setAttribute("id", "results-list");
 
-  const handleAssignDestination = (newDestination, element) => {
+  // Assigns a destination to the search input and removes the old unordered list element
+  const handleAssignDestination = (newDestination) => {
     onAssignDestination(newDestination);
-    element.remove();
+    removeElement("results-list");
   };
 
   searchContainer.appendChild(unorderedList);
 
-  const existingResults = searchContainer.querySelector("#results-list");
-  if (existingResults) {
-    existingResults.remove();
-  }
+  // Removes the old unordered list element
+  removeElement("results-list");
 
+  // Checks if the results are null and displays a message if they are
   if (results === null) {
     const listItem = document.createElement("li");
     listItem.classList.add("item");
@@ -23,11 +33,13 @@ export function autocomplete(results, search, onAssignDestination) {
 
     unorderedList.appendChild(listItem);
   } else {
+    // Creates the first element from the unordered list which is the category
     const categoryItem = document.createElement("li");
     categoryItem.classList.add("item--category");
     categoryItem.textContent = results.category;
     unorderedList.appendChild(categoryItem);
 
+    // Creates the rest of the elements from the unordered list which are the results
     results.items.forEach((result) => {
       const listItem = document.createElement("li");
       listItem.classList.add("item");
@@ -36,8 +48,9 @@ export function autocomplete(results, search, onAssignDestination) {
 
       unorderedList.appendChild(listItem);
 
+      // Assigns a destination to the search input when the user clicks on a result
       listItem.addEventListener("click", () => {
-        handleAssignDestination(result.name, unorderedList);
+        handleAssignDestination(result.name);
       });
     });
   }

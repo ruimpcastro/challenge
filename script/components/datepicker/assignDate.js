@@ -1,5 +1,14 @@
-import { clearWarning } from "../warning/clearWarning.js";
+import { removeElement } from "../removeElement.js";
 import { renderWarning } from "../warning/renderWarning.js";
+
+/**
+ * @param {HTMLInputElement} element - The datepicker element
+ * @param {Date} min - The minimum date
+ * @param {Date} max - The maximum date
+ * @param {function} onAssignDate - The function to assign the date
+ *
+ * @description Assigns a date to the datepicker
+ */
 
 export function assignDate(element, min, max, onAssignDate) {
   let day;
@@ -13,24 +22,27 @@ export function assignDate(element, min, max, onAssignDate) {
   min.setHours(0, 0, 0, 0);
   max.setHours(0, 0, 0, 0);
 
+  // Checks if the selected date is within the next year
   if (selectedDate < min) {
     element.preventDefault;
-    clearWarning(WARNING_ID);
+    removeElement(WARNING_ID);
     renderWarning(
       WARNING_ID,
       "Please select a date that is today or later.",
       element
     );
+    onAssignDate("");
   } else if (selectedDate > max) {
-    clearWarning(WARNING_ID);
+    removeElement(WARNING_ID);
     element.preventDefault;
     renderWarning(
       WARNING_ID,
       "Please select a date that is within the next year.",
       element
     );
+    onAssignDate("");
   } else {
-    clearWarning(WARNING_ID);
+    removeElement(WARNING_ID);
     day = element.valueAsDate.getUTCDate();
     month = element.valueAsDate.getUTCMonth();
     year = element.valueAsDate.getUTCFullYear();

@@ -2,8 +2,9 @@ import { assignDate } from "./assignDate.js";
 
 /**
  * Datepicker component
- * @returns {HTMLInputElement} datepicker
- * @param {function} onAssignDate
+ * @returns {HTMLInputElement} datepicker - The datepicker element.
+ * @param {function} onAssignDate - The function to assign the date.
+ * @description Creates a datepicker input element.
  */
 
 export function datepicker(onAssignDate) {

@@ -1,11 +1,14 @@
 import { datepicker } from "./components/datepicker/datepicker.js";
 import { searchInput } from "./components/searchInput/searchInput.js";
+import { tripDetails } from "./components/tripDetails/tripDetails.js";
+import { removeElement } from "./components/removeElement.js";
 import { renderDate } from "./events/dateEmitter.js";
 
 let isDestination = false;
 let isDate = false;
 
 const updateParagraphVisibility = () => {
+  const paragraph = document.getElementById("booked-trip");
   if (isDate && isDestination) {
     paragraph.style.display = "flex";
   } else {
@@ -14,15 +17,16 @@ const updateParagraphVisibility = () => {
 };
 
 const handleAssignDestination = (destination) => {
+  const destinationOutput = document.getElementById(
+    "destination-output-container"
+  );
   isDestination = false;
   if (destination) {
     isDestination = true;
   }
 
-  const outputExists = document.getElementById("destination-output");
-  if (outputExists) {
-    outputExists.remove();
-  }
+  removeElement("destination-output");
+
   const span = document.createElement("span");
   span.setAttribute("id", "destination-output");
   span.textContent = `Your trip to ${destination}`;
@@ -61,26 +65,4 @@ outputContainer.setAttribute("id", "output-container");
 
 body.appendChild(outputContainer);
 
-const paragraph = document.createElement("p");
-paragraph.style.display = "none";
-paragraph.setAttribute("id", "booked-trip");
-outputContainer.appendChild(paragraph);
-
-const selectedContainer = document.createElement("span");
-selectedContainer.setAttribute("id", "selected-container");
-paragraph.appendChild(selectedContainer);
-
-const destinationOutput = document.createElement("span");
-destinationOutput.setAttribute("id", "destination-output-container");
-
-selectedContainer.appendChild(destinationOutput);
-
-const dateOutput = document.createElement("span");
-dateOutput.setAttribute("id", "date-output-container");
-
-selectedContainer.appendChild(dateOutput);
-
-const enjoy = document.createElement("span");
-enjoy.setAttribute("id", "enjoy");
-enjoy.textContent = "Enjoy your trip! 🏖";
-paragraph.appendChild(enjoy);
+outputContainer.appendChild(tripDetails());
