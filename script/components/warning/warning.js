@@ -6,7 +6,7 @@
  * @description Renders a warning message.
  */
 
-export function renderWarning(id, message, previousElement) {
+export function warning(id, message, previousElement) {
   const warning = document.createElement("span");
   warning.setAttribute("id", id);
   warning.textContent = message;

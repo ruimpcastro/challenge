@@ -1,5 +1,5 @@
 import { removeElement } from "../removeElement.js";
-import { renderWarning } from "../warning/renderWarning.js";
+import { warning } from "../warning/warning.js";
 import { debounce } from "./debounce.js";
 import { fetchDestinations } from "./fetchDestinations.js";
 
@@ -53,7 +53,7 @@ export function searchInput(onAssignDestination) {
     onAssignDestination("");
     inputBox.value = "";
     search = "";
-    renderWarning(WARNING_ID, WARNING_MESSAGE, inputWrapper);
+    warning(WARNING_ID, WARNING_MESSAGE, inputWrapper);
     removeElement("results-list");
   });
 
@@ -75,7 +75,7 @@ export function searchInput(onAssignDestination) {
       } else {
         removeElement(WARNING_ID);
         onAssignDestination("");
-        renderWarning(WARNING_ID, WARNING_MESSAGE, inputWrapper);
+        warning(WARNING_ID, WARNING_MESSAGE, inputWrapper);
         removeElement("results-list");
       }
     })

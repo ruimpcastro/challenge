@@ -2,6 +2,7 @@
  *
  * @returns {HTMLParagraphElement} HTMLParagraphElement
  * @description Creates a paragraph element with a span for the destination and date.
+ *
  */
 
 export function tripDetails() {

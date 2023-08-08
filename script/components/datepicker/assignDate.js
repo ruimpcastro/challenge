@@ -1,5 +1,5 @@
 import { removeElement } from "../removeElement.js";
-import { renderWarning } from "../warning/renderWarning.js";
+import { warning } from "../warning/warning.js";
 
 /**
  * @param {HTMLInputElement} element - The datepicker element
@@ -26,7 +26,7 @@ export function assignDate(element, min, max, onAssignDate) {
   if (selectedDate < min) {
     element.preventDefault;
     removeElement(WARNING_ID);
-    renderWarning(
+    warning(
       WARNING_ID,
       "Please select a date that is today or later.",
       element
@@ -35,7 +35,7 @@ export function assignDate(element, min, max, onAssignDate) {
   } else if (selectedDate > max) {
     removeElement(WARNING_ID);
     element.preventDefault;
-    renderWarning(
+    warning(
       WARNING_ID,
       "Please select a date that is within the next year.",
       element
