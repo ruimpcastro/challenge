@@ -1,5 +1,4 @@
 import { searchInput } from "../../script/components/searchInput/searchInput.js";
-import { fetchDestinations } from "../../script/components/searchInput/fetchDestinations.js";
 
 jest.mock("../../script/components/searchInput/fetchDestinations.js");
 

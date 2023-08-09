@@ -1,6 +1,5 @@
 import { datepicker } from "../../script/components/datepicker/datepicker.js";
 
-// Mock the assignDate function
 jest.mock("../../script/components/datepicker/assignDate.js", () => ({
   assignDate: jest.fn(),
 }));
@@ -23,13 +22,10 @@ describe("datepicker", () => {
     const datepickerElement = datepicker(onAssignDateMock);
     container.appendChild(datepickerElement);
 
-    // Create a fake event object
     const enterKeyEvent = new KeyboardEvent("keypress", { key: "Enter" });
 
-    // Simulate Enter keypress event
     datepickerElement.dispatchEvent(enterKeyEvent);
 
-    // Expect the assignDate function to be called
     expect(
       jest.requireMock("../../script/components/datepicker/assignDate.js")
         .assignDate
@@ -50,13 +46,10 @@ describe("datepicker", () => {
     const datepickerElement = datepicker(onAssignDateMock);
     container.appendChild(datepickerElement);
 
-    // Create a fake event object
     const blurEvent = new Event("blur");
 
-    // Simulate blur event
     datepickerElement.dispatchEvent(blurEvent);
 
-    // Expect the assignDate function to be called
     expect(
       jest.requireMock("../../script/components/datepicker/assignDate.js")
         .assignDate

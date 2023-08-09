@@ -1,5 +1,4 @@
 import { removeElement } from "../removeElement.js";
-import { warning } from "../warning/warning.js";
 
 /**
  * @param {Object} results - The results of the search

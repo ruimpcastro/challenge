@@ -1,7 +1,7 @@
 import { datepicker } from "./components/datepicker/datepicker.js";
+import { removeElement } from "./components/removeElement.js";
 import { searchInput } from "./components/searchInput/searchInput.js";
 import { tripDetails } from "./components/tripDetails/tripDetails.js";
-import { removeElement } from "./components/removeElement.js";
 import { renderDate } from "./events/dateEmitter.js";
 
 let isDestination;

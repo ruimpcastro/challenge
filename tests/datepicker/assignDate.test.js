@@ -2,10 +2,8 @@ import { assignDate } from "../../script/components/datepicker/assignDate";
 import { removeElement } from "../../script/components/removeElement";
 import { warning } from "../../script/components/warning/warning";
 
-// Mock removeElement functions
 jest.mock("../../script/components/removeElement");
 
-// Mock warning function
 jest.mock("../../script/components/warning/warning");
 
 describe("assignDate function", () => {
@@ -13,7 +11,6 @@ describe("assignDate function", () => {
   let mockOnAssignDate;
 
   beforeEach(() => {
-    // Create mock element and onAssignDate function for each test
     mockElement = document.createElement("input");
     mockElement.setAttribute("type", "date");
     mockOnAssignDate = jest.fn();
